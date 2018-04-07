@@ -1,0 +1,49 @@
+Debugger Spezifikation für die 4. Version des njvm.
+
+
+Einleitung:
+    Der Debugger nimmt sich den Debugger der Referenzimplementierung als Vorbild,
+    weshalb Funktionen und Format möglichst gleich implementiert wurden.
+
+Funktionen:
+    Der Debugger stellt 6 folgende Funktionen zur Verfügung:
+
+    'inspect':
+        inspect fordert den Benutzer auf, die zu inspizierende Daten anzugeben.
+        Dabei hat der Benutzer 2 Auswahlmöglichkeiten:
+            stack:
+                stellt den Stack in einer Zeichengrafik dar.
+                Dabei werden Stackpointer (sp->) und Framepointer(fp->) angezeigt,
+                sowie die Werte,die auf dem Stack liegen.
+            data: 
+                stellt die globalen variablen dar, die angelegt worden sind.
+            object:
+                inspiziert ein ObjRef and der spezifizierten Speicheradresse.
+                Es sind 2 Typen von ObjRef zu unterscheiden:
+                    Primitiv:
+                        Gibt den Gespeicherten Wert des Objektes aus. Dies ist eine beliebig große Zahl
+                    Compound:
+                        Gibt die beliebig vielen Adressen(Referenzen) aus.
+    'list':
+        gibt das gerade ausgeführte Programm komplett aus.
+    'breakpoint':
+        Der breakpoint Befehl führt den Benutzer in einen Dialog zum setzten eines Breakpoints.
+        Folgende Eingaben werden bearbeitet:
+            "-1": Löscht den aktuell gesetzten breakpoint
+            Eingabe ist eine Positive Zahl: Zahl repraesentiert Prorammzaehler, an dem gehalten werden soll.
+        Alle anderen Eingaben sind ungültig, werden ignoriert und fuehren zum Debugmenue zurueck.
+    'step': 
+        fuehrt die naechste Instruktion aus.
+    'run':
+        fuehrt das Programm bis zum Ende aus. Falls ein Breakpoint gesetzt wurde, wird an diesem angehalten
+        und das Debugmenue angezeigt
+    'quit': 
+        Beendet das Programm vorzeitig.
+
+Eingabetoleranz:
+    Alle Eingaben, deren Zeichenposition, angefangen beim ersten Zeichen, mit der Zeichenposition eines Befehls uebereinstimmen
+    sind gueltig.
+        Beispiel: "ins" ist ein gueltiger Befehl, da die ersten Drei Zeichenpositionen mit den Zeichenpositionen von "inspect" uebereinstimmen
+    Alle Eingaben, dessen erste Zeichenposition mit der ersten Zeichenposition eines Befehls und darauf folgend dessen Zeichenposition mit der Zeichenposition plus 1 eines Befehls uebereinstimmen, sind gueltig.
+        Beispiel: "inpect" ist ein gueltiger Befehl
+    
